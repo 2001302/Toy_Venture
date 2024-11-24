@@ -25,8 +25,8 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-24 bg-background">
-      <div className="container px-4 md:px-6">
+    <section className="w-full py-24 bg-background">
+      <div className="container">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold mb-4">주요 서비스</h2>
           <p className="text-muted-foreground">

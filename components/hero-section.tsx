@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
   return (
-    <section className="relative py-32 bg-[#1a1f2e]">
-      <div className="container px-4 md:px-6">
+    <section className="relative py-32 bg-[#1a1f2e] w-full">
+      <div className="container">
         <div className="flex flex-col items-center space-y-4 text-center">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-white">
             창의적인 3D 장난감의 세계
