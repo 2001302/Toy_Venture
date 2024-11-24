@@ -21,7 +21,14 @@ export function SiteHeader() {
             FAQ
           </Link>
           <ThemeToggle />
-          <Button>시작하기</Button>
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="sm">
+              로그인
+            </Button>
+            <Button size="sm">
+              회원가입
+            </Button>
+          </div>
         </nav>
       </div>
     </header>
