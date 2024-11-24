@@ -1,13 +1,17 @@
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { getImageUrl } from "@/lib/supabase/image"
 
-export function HeroSection() {
+export async function HeroSection() {
+  // Supabase Storage에서 이미지 URL 가져오기
+  const heroImageUrl = await getImageUrl('image', 'hero/santa-3d.png')
+
   return (
     <section className="relative w-full flex items-center justify-center overflow-hidden bg-[#1a1f2e]">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
-          src="/santa-3d.png"
+          src={heroImageUrl}
           alt="3D Santa Claus"
           fill
           className="opacity-90 object-cover"
