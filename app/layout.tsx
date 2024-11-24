@@ -1,6 +1,7 @@
 import { Noto_Sans_KR } from "next/font/google"
 import { ThemeProvider } from "@/app/providers"
 import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 import "./globals.css"
 
 const notoSansKR = Noto_Sans_KR({
@@ -31,6 +32,7 @@ export default function RootLayout({
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />
             <main className="flex-1">{children}</main>
+            <SiteFooter />
           </div>
         </ThemeProvider>
       </body>

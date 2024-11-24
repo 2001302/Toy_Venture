@@ -12,10 +12,17 @@ export function HeroSection() {
             아이들의 상상력을 키우는 디지털 & 실물 색칠 놀이, 직접 디자인하고, 색칠하고, 3D로 출력하여 나만의 장난감을 만들어보세요.
           </p>
           <div className="space-x-4">
-            <Button size="lg" className="bg-white text-[#1a1f2e] hover:bg-gray-100">
+            <Button 
+              size="lg" 
+              className="bg-white text-[#1a1f2e] hover:bg-gray-100"
+            >
               시작하기
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-white text-[#1a1f2e] dark:text-white hover:bg-white/10 hover:text-[#1a1f2e] dark:hover:text-white"
+            >
               더 알아보기
             </Button>
           </div>
