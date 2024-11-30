@@ -4,7 +4,7 @@ const nextConfig = {
     images: {
       unoptimized: true  // GitHub Pages에서는 이미지 최적화가 지원되지 않음
     },
-    basePath: process.env.NODE_ENV === 'production' ? '/ToyVenture' : '', 
+    basePath: process.env.NODE_ENV === 'production' ? '/your-repo-name' : '',  // repository 이름으로 변경
   }
   
   module.exports = nextConfig 
