@@ -4,12 +4,18 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { GalleryItem } from "@/types/gallery"
+import { supabase } from "@/lib/supabase/client"
 
 interface GalleryGridProps {
   items: GalleryItem[]
 }
 
 export function GalleryGrid({ items }: GalleryGridProps) {
+  const getImageUrl = (path: string) => {
+    const { data } = supabase.storage.from('gallery').getPublicUrl('thumbnail'+path)
+    return data.publicUrl
+  }
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {items.map((item) => (
@@ -17,7 +23,7 @@ export function GalleryGrid({ items }: GalleryGridProps) {
           <CardContent className="p-0">
             <div className="relative aspect-square">
               <Image
-                src={item.thumbnail}
+                src={getImageUrl(item.thumbnail)}
                 alt={item.title}
                 fill
                 className="object-cover transition-transform group-hover:scale-105"
