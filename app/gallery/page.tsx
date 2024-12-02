@@ -21,17 +21,29 @@ export default function GalleryPage() {
 
         if (error) throw error
 
-        const formattedData: GalleryItem[] = data.map(item => ({
-          id: item.id,
-          title: item.title,
-          description: item.description,
-          author: item.author,
-          thumbnail: item.thumbnail,
-          modelFile: item.model_file,
-          likes: item.likes,
-          created_at: item.created_at,
-          updated_at: item.updated_at,
-        }))
+        const formattedData: GalleryItem[] = data.map(item => {
+          const thumbnailUrl = supabase.storage
+            .from('gallery')
+            .getPublicUrl(item.thumbnail)
+            .data.publicUrl
+
+          const modelFileUrl = supabase.storage
+            .from('gallery')
+            .getPublicUrl(item.model_file)
+            .data.publicUrl
+
+          return {
+            id: item.id,
+            title: item.title,
+            description: item.description,
+            author: item.author,
+            thumbnail: thumbnailUrl,
+            modelFile: modelFileUrl,
+            likes: item.likes,
+            created_at: item.created_at,
+            updated_at: item.updated_at,
+          }
+        })
 
         setItems(formattedData)
       } catch (error) {

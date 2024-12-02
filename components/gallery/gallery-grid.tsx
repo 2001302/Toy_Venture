@@ -1,59 +1,55 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Heart } from "lucide-react"
-import { Button } from "@/components/ui/button"
+'use client'
+
 import { GalleryItem } from "@/types/gallery"
-import { supabase } from "@/lib/supabase/client"
+import { Heart } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { useState } from "react"
+import { GalleryItemDialog } from "./gallery-item-dialog"
 
 interface GalleryGridProps {
   items: GalleryItem[]
 }
 
 export function GalleryGrid({ items }: GalleryGridProps) {
-  const getImageUrl = (path: string) => {
-    const { data } = supabase.storage.from('gallery').getPublicUrl(path)
-    return data.publicUrl
-  }
+  const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {items.map((item) => (
-        <Card key={item.id} className="group overflow-hidden">
-          <CardContent className="p-0">
-            <div className="relative aspect-square">
-              <Image
-                src={getImageUrl(item.thumbnail)}
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {items.map((item) => (
+          <div
+            key={item.id}
+            className="group relative bg-card rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+            onClick={() => {
+              setSelectedItem(item)
+              setDialogOpen(true)
+            }}
+          >
+            <div className="aspect-square">
+              <img
+                src={item.thumbnail}
                 alt={item.title}
-                fill
-                className="object-cover transition-transform group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform group-hover:scale-105"
               />
             </div>
-          </CardContent>
-          <CardFooter className="flex flex-col items-start p-4">
-            <h3 className="font-semibold group-hover:text-primary transition-colors">
-              {item.title}
-            </h3>
-            <p className="text-sm text-muted-foreground mb-2">
-              by {item.author}
-            </p>
-            <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-              {item.description}
-            </p>
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center gap-2">
-                <Heart className="h-4 w-4" />
-                <span className="text-sm">{item.likes}</span>
-              </div>
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent text-white">
+              <h3 className="font-semibold">{item.title}</h3>
+              <p className="text-sm opacity-90">by {item.author}</p>
+              <Badge variant="secondary" className="mt-2">
+                <Heart className="w-3 h-3 mr-1" />
+                {item.likes}
+              </Badge>
             </div>
-            <Button asChild className="w-full mt-3">
-              <Link href={`/gallery/${item.id}`}>
-                자세히 보기
-              </Link>
-            </Button>
-          </CardFooter>
-        </Card>
-      ))}
-    </div>
+          </div>
+        ))}
+      </div>
+
+      <GalleryItemDialog 
+        item={selectedItem}
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+      />
+    </>
   )
 } 
