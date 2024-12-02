@@ -12,7 +12,7 @@ interface GalleryGridProps {
 
 export function GalleryGrid({ items }: GalleryGridProps) {
   const getImageUrl = (path: string) => {
-    const { data } = supabase.storage.from('gallery').getPublicUrl('thumbnail'+path)
+    const { data } = supabase.storage.from('gallery').getPublicUrl(path)
     return data.publicUrl
   }
 
