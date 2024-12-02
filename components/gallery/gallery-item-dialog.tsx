@@ -37,8 +37,8 @@ export function GalleryItemDialog({ item, open, onOpenChange }: GalleryItemDialo
             </Suspense>
           </div>
           
-          {/* 상세 정보 영역 */}
-          <div className="p-6 overflow-y-auto">
+          {/* 상세 정보 영역 - select-none 클래스 추가 */}
+          <div className="p-6 overflow-y-auto select-none">
             <div className="space-y-4">
               <div>
                 <h2 className="text-2xl font-bold">{item.title}</h2>
